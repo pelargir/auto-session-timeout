@@ -18,7 +18,42 @@ Or clone the project:
 
 == Usage
 
-TBD
+After installing, tell your application controller to use auto timeout:
+
+  class ApplicationController < ActionController::Base
+    auto_session_timeout 1.hour
+    ...
+  end
+
+You will also need to insert this line inside the <body></body> tags in
+your views. The easiest way to do this is to insert it once inside your
+default or application-wide layout:
+
+  <html>
+    <head>...</head>
+    <body>
+      <%= auto_session_timeout_js %>
+      ...
+    </body>
+  </html>
+
+Last, you need to setup an action to return the session status. Define
+an action in a controller (the best choice is probably your user or session
+controller). The action should look like this:
+
+  class SessionsController < ApplicationController
+    def active
+     render_auto_session_timeout
+    end
+    ...
+  end
+
+Make sure to add this line in routes.rb to map "/active" to this action:
+
+  map.active '/active', :controller => 'sessions', :action => 'active'
+
+You're done! By default, sessions auto timeout after 60 minutes of inactivity.
+This value will be configurable in future versions of the plugin.
 
 == Resources
 
