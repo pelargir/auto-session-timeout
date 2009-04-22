@@ -4,7 +4,7 @@ module AutoSessionTimeoutHelper
 new Ajax.PeriodicalUpdater('', '/active', {frequency:60, method:'get', onSuccess: function(e) {
 	if ($('active_session').innerHTML == 'true' && e.responseText == 'false') {
 		alert('Your session has timed out.');
-		window.location.href = '/login';
+		window.location.href = '/logout';
 	}
 }});
 JS
