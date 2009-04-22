@@ -37,20 +37,29 @@ default or application-wide layout:
     </body>
   </html>
 
-Last, you need to setup an action to return the session status. Define
-an action in a controller (the best choice is probably your user or session
-controller). The action should look like this:
+You need to setup two actions: one to return the session status and
+another that runs when the session times out. Define both actions in a
+controller (the best choice is probably your user or session controller).
+The actions should look like this:
 
   class SessionsController < ApplicationController
     def active
-     render_auto_session_timeout
+     render_session_status
+    end
+    
+    def timeout
+      render_session_timeout
     end
     ...
   end
 
-Make sure to add this line in routes.rb to map "/active" to this action:
+You can customize the actions as you see fit, even going so far as to
+remove the render calls if you want something different to occur.
+
+Make sure to properly map the actions in your routes.rb file:
 
   map.active '/active', :controller => 'sessions', :action => 'active'
+  map.active '/timeout', :controller => 'sessions', :action => 'timeout'
 
 You're done! By default, sessions auto timeout after 60 minutes of inactivity.
 This value will be configurable in future versions of the plugin.
