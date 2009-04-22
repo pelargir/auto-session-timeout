@@ -1,0 +1,27 @@
+= auto-session-timeout
+
+Provides automatic session timeout in a Rails application.
+
+== Installation
+
+Install the gem directly:
+
+  sudo gem install pelargir-auto-session-timeout --source=http://gems.github.com
+  
+Or install the gem in your Rails project:
+  
+  script/plugin install git://github.com/pelargir/auto-session-timeout.git
+
+Or clone the project:
+
+  git clone git://github.com/pelargir/auto-session-timeout.git
+
+== Usage
+
+TBD
+
+== Resources
+
+Repository: http://github.com/pelargir/auto-session-timeout/
+Blog: http://matthewbass.com
+Author: Matthew Bass

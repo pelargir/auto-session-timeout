@@ -1,0 +1,1 @@
+require 'auto_session_timeout'
