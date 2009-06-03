@@ -17,6 +17,11 @@ module AutoSessionTimeout
         end
       end
     end
+    
+    def auto_session_timeout_actions
+      define_method(:active) { render_session_status }
+      define_method(:timeout) { render_session_timeout }
+    end
   end
   
   def render_session_status

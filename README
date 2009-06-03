@@ -2,6 +2,7 @@
 
 Provides automatic session timeout in a Rails application.
 
+
 == Installation
 
 Install the gem directly:
@@ -16,6 +17,7 @@ Or clone the project:
 
   git clone git://github.com/pelargir/auto-session-timeout.git
 
+
 == Usage
 
 After installing, tell your application controller to use auto timeout:
@@ -27,7 +29,9 @@ After installing, tell your application controller to use auto timeout:
 
 You will also need to insert this line inside the <body></body> tags in
 your views. The easiest way to do this is to insert it once inside your
-default or application-wide layout:
+default or application-wide layout. Make sure you are only rendering
+it if the user is logged in, otherwise the plugin will attempt to force
+non-existent sessions to timeout, wreaking havoc:
 
   <html>
     <head>...</head>
@@ -40,9 +44,19 @@ default or application-wide layout:
   </html>
 
 You need to setup two actions: one to return the session status and
-another that runs when the session times out. Define both actions in a
-controller (the best choice is probably your user or session controller).
-The actions should look like this:
+another that runs when the session times out. You can use the default
+actions included with the plugin by inserting this line in your target
+controller (most likely your user or session controller):
+
+class SessionsController < ApplicationController
+  auto_session_timeout_actions
+  ...
+end
+
+To customize the default actions, simply override them. You can call
+the render_session_status and render_session_timeout methods to use
+the default implementation from the plugin, or you can define the
+actions entirely with your own custom code:
 
   class SessionsController < ApplicationController
     def active
@@ -55,16 +69,32 @@ The actions should look like this:
     ...
   end
 
-You can customize the actions as you see fit, even going so far as to
-remove the render calls if you want something different to occur.
-
-Make sure to properly map the actions in your routes.rb file:
+In any of these cases, make sure to properly map the actions in
+your routes.rb file:
 
   map.active '/active', :controller => 'sessions', :action => 'active'
   map.timeout '/timeout', :controller => 'sessions', :action => 'timeout'
 
-You're done! By default, sessions auto timeout after 60 minutes of inactivity.
-This value will be configurable in future versions of the plugin.
+You're done! Enjoy watching your sessions automatically timeout.
+
+
+== Additional Configuration
+
+By default, the JavaScript code checks the server every 60 seconds for
+active sessions. If you prefer that it check more frequently, pass a
+frequency attribute to the helper method. The frequency is given in
+seconds. The following example checks the server every 15 seconds:
+
+  <html>
+    <head>...</head>
+    <body>
+      <% if logged_in? -%>
+        <%= auto_session_timeout_js :frequency => 15 %>
+      <% end -%>
+      ...
+    </body>
+  </html>
+
 
 == Resources
 
