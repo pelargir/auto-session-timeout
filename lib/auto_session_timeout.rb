@@ -11,7 +11,7 @@ module AutoSessionTimeout
         if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
           c.send :reset_session
         else
-          unless c.params[:controller] == "sessions" && c.params[:action] == "active"
+          unless c.send(:active_url) == c.url_for(c.params)
             c.session[:auto_session_expires_at] = Time.now + seconds
           end
         end
@@ -20,7 +20,7 @@ module AutoSessionTimeout
   end
   
   def render_session_status
-    response.headers["Etag"] = nil  # clear etags to prevent caching
+    response.headers["Etag"] = ""  # clear etags to prevent caching
     render :text => logged_in?, :status => 200
   end
   

@@ -1,7 +1,8 @@
 module AutoSessionTimeoutHelper
-  def auto_session_timeout_js
+  def auto_session_timeout_js(options={})
+    frequency = options[:frequency] || 60
     code = <<JS
-new Ajax.PeriodicalUpdater('', '/active', {frequency:60, method:'get', onSuccess: function(e) {
+new Ajax.PeriodicalUpdater('', '/active', {frequency:#{frequency}, method:'get', onSuccess: function(e) {
 	if (e.responseText == 'false') window.location.href = '/timeout';
 }});
 JS

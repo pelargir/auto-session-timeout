@@ -61,7 +61,7 @@ remove the render calls if you want something different to occur.
 Make sure to properly map the actions in your routes.rb file:
 
   map.active '/active', :controller => 'sessions', :action => 'active'
-  map.active '/timeout', :controller => 'sessions', :action => 'timeout'
+  map.timeout '/timeout', :controller => 'sessions', :action => 'timeout'
 
 You're done! By default, sessions auto timeout after 60 minutes of inactivity.
 This value will be configurable in future versions of the plugin.
