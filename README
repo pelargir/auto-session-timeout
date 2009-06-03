@@ -32,7 +32,9 @@ default or application-wide layout:
   <html>
     <head>...</head>
     <body>
-      <%= auto_session_timeout_js %>
+      <% if logged_in? -%>
+        <%= auto_session_timeout_js %>
+      <% end -%>
       ...
     </body>
   </html>
