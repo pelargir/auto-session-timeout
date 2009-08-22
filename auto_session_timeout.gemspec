@@ -9,11 +9,16 @@ Gem::Specification.new do |s|
   s.has_rdoc = true
   s.authors  = ["Matthew Bass"]
   s.files    = [
+    "auto_session_timeout.gemspec",
     "CHANGELOG",
+    "init.rb",
+    "lib/auto_session_timeout.rb",
+		"lib/auto_session_timeout_helper.rb",
     "MIT-LICENSE",
+    "Rakefile",
 		"README",
-		"auto-session-timeout.gemspec",
-		"lib/auto-session-timeout.rb"
+		"test/auto_session_timeout_test.rb",
+		"test/test_helper.rb"
 		]
   s.rdoc_options = ["--main", "README"]
   s.extra_rdoc_files = ["README"]
