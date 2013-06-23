@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Auto::Session::Timeout::VERSION
   spec.authors       = ["Matthew Bass"]
   spec.email         = ["pelargir@gmail.com"]
-  spec.description   = %q{Adds several handy expectations for testing ActiveRecord model validations.}
+  spec.description   = %q{Provides automatic session timeout in a Rails application.}
   spec.summary       = %q{Provides automatic session timeout in a Rails application.}
   spec.homepage      = "http://github.com/pelargir/auto-session-timeout"
   spec.license       = "MIT"
