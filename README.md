@@ -100,6 +100,6 @@ seconds. The following example checks the server every 15 seconds:
 
 ## Resources
 
-Repository: http://github.com/pelargir/auto-session-timeout/
-Blog: http://www.matthewbass.com
-Author: Matthew Bass
+* Repository: http://github.com/pelargir/auto-session-timeout/
+* Blog: http://www.matthewbass.com
+* Author: Matthew Bass
