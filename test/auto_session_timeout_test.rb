@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class AutoSessionTimeoutTest < Test::Unit::TestCase
+describe AutoSessionTimeout do
 
-  def test_something
+  it "tests something" do
     assert true
   end
 
