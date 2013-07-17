@@ -1,3 +1,5 @@
+require 'auto_session_timeout_helper'
+
 module AutoSessionTimeout
   
   def self.included(controller)
