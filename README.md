@@ -36,9 +36,9 @@ it if the user is logged in, otherwise the plugin will attempt to force
 non-existent sessions to timeout, wreaking havoc:
 
     <body>
-      <% if logged_in? -%>
+      <% if logged_in? %>
         <%= auto_session_timeout_js %>
-      <% end -%>
+      <% end %>
     </body>
 
 You need to setup two actions: one to return the session status and
@@ -68,8 +68,8 @@ actions entirely with your own custom code:
 In any of these cases, make sure to properly map the actions in
 your routes.rb file:
 
-    map.active '/active', :controller => 'sessions', :action => 'active'
-    map.timeout '/timeout', :controller => 'sessions', :action => 'timeout'
+    match 'active'  => 'sessions#active',  via: :get
+    match 'timeout' => 'sessions#timeout', via: :get
 
 You're done! Enjoy watching your sessions automatically timeout.
 
@@ -83,9 +83,9 @@ seconds. The following example checks the server every 15 seconds:
     <html>
       <head>...</head>
       <body>
-        <% if logged_in? -%>
+        <% if logged_in? %>
           <%= auto_session_timeout_js :frequency => 15 %>
-        <% end -%>
+        <% end %>
         ...
       </body>
     </html>
