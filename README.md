@@ -36,7 +36,7 @@ it if the user is logged in, otherwise the plugin will attempt to force
 non-existent sessions to timeout, wreaking havoc:
 
     <body>
-      <% if logged_in? %>
+      <% if current_user %>
         <%= auto_session_timeout_js %>
       <% end %>
     </body>
@@ -83,12 +83,17 @@ seconds. The following example checks the server every 15 seconds:
     <html>
       <head>...</head>
       <body>
-        <% if logged_in? %>
+        <% if current_user %>
           <%= auto_session_timeout_js :frequency => 15 %>
         <% end %>
         ...
       </body>
     </html>
+
+## TODO
+
+* current_user must be defined
+* using Prototype vs. jQuery
 
 ## Contributing
 
