@@ -84,7 +84,7 @@ seconds. The following example checks the server every 15 seconds:
       <head>...</head>
       <body>
         <% if current_user %>
-          <%= auto_session_timeout_js :frequency => 15 %>
+          <%= auto_session_timeout_js frequency: 15 %>
         <% end %>
         ...
       </body>
