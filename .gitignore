@@ -3,6 +3,8 @@
 .bundle
 .config
 .yardoc
+*.sublime-project
+*.sublime-workspace
 Gemfile.lock
 InstalledFiles
 _yardoc
