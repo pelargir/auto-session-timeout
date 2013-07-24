@@ -94,6 +94,7 @@ seconds. The following example checks the server every 15 seconds:
 
 * current_user must be defined
 * using Prototype vs. jQuery
+* setting timeout in controller vs. user
 
 ## Contributing
 

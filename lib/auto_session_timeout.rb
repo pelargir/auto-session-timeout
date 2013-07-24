@@ -6,13 +6,14 @@ module AutoSessionTimeout
   end
   
   module ClassMethods
-    def auto_session_timeout(seconds)
+    def auto_session_timeout(seconds=nil)
       prepend_before_filter do |c|
         if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
           c.send :reset_session
         else
           unless c.url_for(c.params).start_with?(c.send(:active_url))
-            c.session[:auto_session_expires_at] = Time.now + seconds
+            offset = seconds || current_user.try(:auto_timeout)
+            c.session[:auto_session_expires_at] = Time.now + offset if offset && offset > 0
           end
         end
       end
