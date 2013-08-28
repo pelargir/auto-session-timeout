@@ -1,3 +1,5 @@
-6/22/13 - Switched to Bundler for generating the gemspec [Matthew Bass]
+2014-07-14 - Added jQuery support [krishnasrihari]
 
-4/22/09 - Initial import [Matthew Bass]
+2013-06-22 - Switched to Bundler for generating the gemspec [pelargir]
+
+2009-04-22 - Initial import [pelargir]

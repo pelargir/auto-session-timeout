@@ -12,6 +12,19 @@ if (typeof(Ajax) != 'undefined') {
   new Ajax.PeriodicalUpdater('', '/active', {frequency:60, method:'get', onSuccess: function(e) {
     if (e.responseText == 'false') window.location.href = '/timeout';
   }});
+}else if(typeof(jQuery) != 'undefined'){
+  function PeriodicalQuery() {
+    $.ajax({
+      url: '/active',
+      success: function(data) {
+        if(data == 'false'){
+          window.location.href = '/timeout';
+        }
+      }
+    });
+    setTimeout(PeriodicalQuery, (60 * 1000));
+  }
+  setTimeout(PeriodicalQuery, (60 * 1000));
 } else {
   $.PeriodicalUpdater('/active', {minTimeout:60000, multiplier:0, method:'get', verbose:2}, function(remoteData, success) {
     if (success == 'success' && remoteData == 'false')
