@@ -16,9 +16,9 @@ if (typeof(Ajax) != 'undefined') {
         }
       }
     });
-    setTimeout(PeriodicalQuery, (frequency * 1000));
+    setTimeout(PeriodicalQuery, (#{frequency} * 1000));
   }
-  setTimeout(PeriodicalQuery, (frequency * 1000));
+  setTimeout(PeriodicalQuery, (#{frequency} * 1000));
 } else {
   $.PeriodicalUpdater('/active', {minTimeout:#{frequency * 1000}, multiplier:0, method:'get', verbose:2}, function(remoteData, success) {
     if (success == 'success' && remoteData == 'false')
