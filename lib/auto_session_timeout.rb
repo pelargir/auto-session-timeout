@@ -11,7 +11,7 @@ module AutoSessionTimeout
         if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
           c.send :reset_session
         else
-          unless c.url_for(c.params).start_with?(c.send(:active_url))
+          unless c.request.original_url.start_with?(c.send(:active_url))
             offset = seconds || (current_user.respond_to?(:auto_timeout) ? current_user.auto_timeout : nil)
             c.session[:auto_session_expires_at] = Time.now + offset if offset && offset > 0
           end
