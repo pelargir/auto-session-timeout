@@ -2,7 +2,6 @@ module AutoSessionTimeout
   
   def self.included(controller)
     controller.extend ClassMethods
-    controller.hide_action :render_auto_session_timeout
   end
   
   module ClassMethods
