@@ -6,7 +6,7 @@ module AutoSessionTimeout
   
   module ClassMethods
     def auto_session_timeout(seconds=nil)
-      prepend_before_filter do |c|
+      prepend_before_action do |c|
         if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
           c.send :reset_session
         else
