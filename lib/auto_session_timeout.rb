@@ -1,9 +1,9 @@
 module AutoSessionTimeout
-  
+
   def self.included(controller)
     controller.extend ClassMethods
   end
-  
+
   module ClassMethods
     def auto_session_timeout(seconds=nil)
       prepend_before_action do |c|
@@ -17,23 +17,23 @@ module AutoSessionTimeout
         end
       end
     end
-    
+
     def auto_session_timeout_actions
       define_method(:active) { render_session_status }
       define_method(:timeout) { render_session_timeout }
     end
   end
-  
+
   def render_session_status
     response.headers["Etag"] = ""  # clear etags to prevent caching
     render plain: !!current_user, status: 200
   end
-  
+
   def render_session_timeout
     flash[:notice] = "Your session has timed out."
-    redirect_to "/login"
+    redirect_to new_user_session_path
   end
-  
+
 end
 
 ActionController::Base.send :include, AutoSessionTimeout
