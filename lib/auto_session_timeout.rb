@@ -5,9 +5,9 @@ module AutoSessionTimeout
   end
   
   module ClassMethods
-    def auto_session_timeout(seconds=nil)
+    def auto_session_timeout(seconds=nil, sign_in_path)
       prepend_before_action do |c|
-        if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
+        if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now && (sign_in_path ? !(c.env["PATH_INFO"] == sign_in_path && c.env["REQUEST_METHOD"] == "POST") : true)
           c.send :reset_session
         else
           unless c.request.original_url.start_with?(c.send(:active_url))
