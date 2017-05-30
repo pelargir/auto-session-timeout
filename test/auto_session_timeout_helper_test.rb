@@ -59,6 +59,10 @@ if (typeof Ajax !== 'undefined') {
     it "uses 60 when custom frequency is nil" do
       assert_match /frequency:60/, subject.auto_session_timeout_js(frequency: nil)
     end
+
+    it "accepts attributes" do
+      assert_match /data-turbolinks-eval="false"/, subject.auto_session_timeout_js(attributes: { 'data-turbolinks-eval': 'false' })
+    end
   end
 
 end

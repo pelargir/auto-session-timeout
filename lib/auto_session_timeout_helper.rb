@@ -2,6 +2,7 @@ module AutoSessionTimeoutHelper
   def auto_session_timeout_js(options={})
     frequency = options[:frequency] || 60
     verbosity = options[:verbosity] || 2
+    attributes = options[:attributes] || {}
     code = <<JS
 if (typeof Ajax !== 'undefined') {
   new Ajax.PeriodicalUpdater('', '/active', {frequency:#{frequency}, method:'get', onSuccess: function(e) {
@@ -43,7 +44,7 @@ if (typeof Ajax !== 'undefined') {
   setTimeout(PeriodicalQuery, (#{frequency} * 1000));
 }
 JS
-    javascript_tag(code)
+    javascript_tag(code, attributes)
   end
 end
 
