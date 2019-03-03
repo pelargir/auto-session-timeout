@@ -10,7 +10,9 @@ kind of public computer system, this plugin is a necessity.
 
 Add this line to your application's Gemfile:
 
-    gem 'auto-session-timeout'
+```ruby
+gem 'auto-session-timeout'
+```
 
 And then execute:
 
@@ -24,10 +26,12 @@ Or install it yourself as:
 
 After installing, tell your application controller to use auto timeout:
 
-    class ApplicationController < ActionController::Base
-      auto_session_timeout 1.hour
-      ...
-    end
+```ruby
+class ApplicationController < ActionController::Base
+  auto_session_timeout 1.hour
+  ...
+end
+```
 
 You will also need to insert this line inside the body tags in your
 views. The easiest way to do this is to insert it once inside your
@@ -35,41 +39,49 @@ default or application-wide layout. Make sure you are only rendering
 it if the user is logged in, otherwise the plugin will attempt to force
 non-existent sessions to timeout, wreaking havoc:
 
-    <body>
-      <% if current_user %>
-        <%= auto_session_timeout_js %>
-      <% end %>
-    </body>
+```erb
+<body>
+  <% if current_user %>
+    <%= auto_session_timeout_js %>
+  <% end %>
+</body>
+```
 
 You need to setup two actions: one to return the session status and
 another that runs when the session times out. You can use the default
 actions included with the plugin by inserting this line in your target
 controller (most likely your user or session controller):
 
-    class SessionsController < ApplicationController
-      auto_session_timeout_actions
-    end
+```ruby
+class SessionsController < ApplicationController
+  auto_session_timeout_actions
+end
+```
 
 To customize the default actions, simply override them. You can call
 the render_session_status and render_session_timeout methods to use
 the default implementation from the plugin, or you can define the
 actions entirely with your own custom code:
 
-    class SessionsController < ApplicationController
-      def active
-       render_session_status
-      end
-      
-      def timeout
-        render_session_timeout
-      end
-    end
+```ruby
+class SessionsController < ApplicationController
+  def active
+   render_session_status
+  end
+
+  def timeout
+    render_session_timeout
+  end
+end
+```
 
 In any of these cases, make sure to properly map the actions in
 your routes.rb file:
 
-    match 'active'  => 'sessions#active',  via: :get
-    match 'timeout' => 'sessions#timeout', via: :get
+```ruby
+match 'active'  => 'sessions#active',  via: :get
+match 'timeout' => 'sessions#timeout', via: :get
+```
 
 You're done! Enjoy watching your sessions automatically timeout.
 
@@ -80,15 +92,17 @@ active sessions. If you prefer that it check more frequently, pass a
 frequency attribute to the helper method. The frequency is given in
 seconds. The following example checks the server every 15 seconds:
 
-    <html>
-      <head>...</head>
-      <body>
-        <% if current_user %>
-          <%= auto_session_timeout_js frequency: 15 %>
-        <% end %>
-        ...
-      </body>
-    </html>
+```erb
+<html>
+  <head>...</head>
+  <body>
+    <% if current_user %>
+      <%= auto_session_timeout_js frequency: 15 %>
+    <% end %>
+    ...
+  </body>
+</html>
+```
 
 ## TODO
 
