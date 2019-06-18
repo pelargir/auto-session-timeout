@@ -9,7 +9,7 @@ function PeriodicalQuery() {
   request.onload = function (event) {
     var status = event.target.status;
     var response = event.target.response;
-    if (status === 200 && (response === false || response === 'false')) {
+    if (status === 200 && (response === false || response === 'false' || response === null)) {
       window.location.href = '/timeout';
     }
   };
