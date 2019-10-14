@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe AutoSessionTimeoutHelper do
 
-  subject { Class.new(ActionView::Base).new }
+  subject { ActionView::Base.new }
 
   describe "#auto_session_timeout_js" do
     it "returns correct JS" do
@@ -13,7 +13,7 @@ function PeriodicalQuery() {
   request.onload = function (event) {
     var status = event.target.status;
     var response = event.target.response;
-    if (status === 200 && (response === false || response === 'false')) {
+    if (status === 200 && (response === false || response === 'false' || response === null)) {
       window.location.href = '/timeout';
     }
   };
