@@ -4,7 +4,7 @@ Provides automatic session timeout in a Rails application. Very easy
 to install and configure. Have you ever wanted to force your users
 off your app if they go idle for a certain period of time? Many
 online banking sites use this technique. If your app is used on any
-kind of public computer system, this plugin is a necessity.
+kind of public computer system, this gem is a necessity.
 
 ## Installation
 
@@ -36,7 +36,7 @@ end
 You will also need to insert this line inside the body tags in your
 views. The easiest way to do this is to insert it once inside your
 default or application-wide layout. Make sure you are only rendering
-it if the user is logged in, otherwise the plugin will attempt to force
+it if the user is logged in, otherwise the gem will attempt to force
 non-existent sessions to timeout, wreaking havoc:
 
 ```erb
@@ -49,7 +49,7 @@ non-existent sessions to timeout, wreaking havoc:
 
 You need to setup two actions: one to return the session status and
 another that runs when the session times out. You can use the default
-actions included with the plugin by inserting this line in your target
+actions included with the gem by inserting this line in your target
 controller (most likely your user or session controller):
 
 ```ruby
@@ -60,7 +60,7 @@ end
 
 To customize the default actions, simply override them. You can call
 the render_session_status and render_session_timeout methods to use
-the default implementation from the plugin, or you can define the
+the default implementation from the gem, or you can define the
 actions entirely with your own custom code:
 
 ```ruby

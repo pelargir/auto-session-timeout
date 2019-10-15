@@ -1,5 +1,47 @@
+2019-03-03 - Update README [cprodhomme]
+
+2018-12-21 - Support Rails protect_from_forgery [davegudge]
+
+2017-06-13 - v0.9.5
+
+2017-06-12 - Exclude controller actions from CSRF verification [pelargir]
+
+2017-06-12 - Make updater use vanilla JS [emilos]
+
+2017-05-16 - v0.9.4
+
+2017-05-08 - Rails 5 compatibility [quainjn]
+
+2016-10-14 - Allow defining verbosity [zaimramlan]
+
+2013-08-29 - v0.9.3
+
+2013-08-28 - Add jQuery support [krishnasrihari]
+
+2013-07-24 - v0.9.2
+
+2013-07-24 - Add tests and use Ruby 1.9 hash syntax [pelargir]
+
+2013-07-24 - v0.9.1
+
+2013-07-24 - Timeout can be set in controller or user model [pelargir]
+
+2013-07-22 - v0.9
+
+2013-07-21 - Support for jQuery periodical updater plugin [pelargir]
+
+2013-07-17 - v0.8
+
 2014-07-14 - Added jQuery support [krishnasrihari]
 
+2013-06-23 - v0.7
+
 2013-06-22 - Switched to Bundler for generating the gemspec [pelargir]
+
+2009-08-22 - v0.5
+
+2009-06-03 - Move controller actions into plugin [pelargir]
+
+2009-04-22 - Add JS helper [pelargir]
 
 2009-04-22 - Initial import [pelargir]
