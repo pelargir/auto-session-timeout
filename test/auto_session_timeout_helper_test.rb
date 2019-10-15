@@ -2,6 +2,16 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe AutoSessionTimeoutHelper do
 
+  class ActionView::Base
+    def timeout_path
+      '/timeout'
+    end
+    
+    def active_path
+      '/active'
+    end
+  end
+
   subject { ActionView::Base.new }
 
   describe "#auto_session_timeout_js" do
