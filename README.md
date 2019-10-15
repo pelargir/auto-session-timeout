@@ -33,11 +33,29 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-You will also need to insert this line inside the body tags in your
-views. The easiest way to do this is to insert it once inside your
-default or application-wide layout. Make sure you are only rendering
-it if the user is logged in, otherwise the gem will attempt to force
-non-existent sessions to timeout, wreaking havoc:
+This will use a global timeout of 1 hour. If you want to specify a
+custom timeout value per user, don't pass a value above. Instead,
+override `#auto_timeout` in your `#current_user` model. This is
+typically the `User` class:
+
+```ruby
+class ApplicationController < ActionController::Base
+  auto_session_timeout
+end
+
+class User < ActiveRecord::Base
+  def auto_timeout
+    15.minutes
+  end
+end
+```
+
+You will also need to insert a call to the `#auto_session_timeout_js`
+helper method inside the body tags in your views. The easiest way to
+do this is to insert it once inside your default or application-wide
+layout. Make sure you are only rendering if the user is logged in,
+otherwise the gem will attempt to force non-existent sessions to
+timeout, wreaking havoc:
 
 ```erb
 <body>
@@ -59,8 +77,8 @@ end
 ```
 
 To customize the default actions, simply override them. You can call
-the render_session_status and render_session_timeout methods to use
-the default implementation from the gem, or you can define the
+the `#render_session_status` and `#render_session_timeout` methods to
+use the default implementation from the gem, or you can define the
 actions entirely with your own custom code:
 
 ```ruby
@@ -75,12 +93,12 @@ class SessionsController < ApplicationController
 end
 ```
 
-In any of these cases, make sure to properly map the actions in
-your routes.rb file:
+In any of these cases, make sure to properly map the actions in your
+routes.rb file:
 
 ```ruby
-match 'active'  => 'sessions#active',  via: :get
-match 'timeout' => 'sessions#timeout', via: :get
+get 'active'  => 'sessions#active'
+get 'timeout' => 'sessions#timeout'
 ```
 
 You're done! Enjoy watching your sessions automatically timeout.
@@ -108,7 +126,7 @@ seconds. The following example checks the server every 15 seconds:
 
 * current_user must be defined
 * using Prototype vs. jQuery
-* setting timeout in controller vs. user
+* using with Devise
 
 ## Contributing
 
