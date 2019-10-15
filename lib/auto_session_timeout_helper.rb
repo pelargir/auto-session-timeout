@@ -10,10 +10,10 @@ function PeriodicalQuery() {
     var status = event.target.status;
     var response = event.target.response;
     if (status === 200 && (response === false || response === 'false' || response === null)) {
-      window.location.href = '/timeout';
+      window.location.href = '#{timeout_path}';
     }
   };
-  request.open('GET', '/active', true);
+  request.open('GET', '#{active_path}', true);
   request.responseType = 'json';
   request.send();
   setTimeout(PeriodicalQuery, (#{frequency} * 1000));
