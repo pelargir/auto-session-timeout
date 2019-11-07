@@ -1,0 +1,20 @@
+language: ruby
+sudo: false
+cache: bundler
+before_install:
+  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem install bundler -v '< 2'
+rvm:
+  - 2.2.10
+  - 2.3.8
+  - 2.4.9
+  - 2.5.7
+  - 2.6.5
+  - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - gemfile: Gemfile
+gemfile:
+  - Gemfile
+script: bundle exec rake

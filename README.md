@@ -1,4 +1,6 @@
-# auto-session-timeout
+[![Build Status](https://travis-ci.com/pelargir/auto-session-timeout.svg?branch=master)](https://travis-ci.com/pelargir/auto-session-timeout)
+
+# Auto::Session::Timeout
 
 Provides automatic session timeout in a Rails application. Very easy
 to install and configure. Have you ever wanted to force your users
