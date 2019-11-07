@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Auto::Session::Timeout::VERSION
   spec.authors       = ["Matthew Bass"]
   spec.email         = ["pelargir@gmail.com"]
-  spec.description   = %q{Provides automatic session timeout in a Rails application.}
+  spec.description   = %q{Automatic session timeout in Rails}
   spec.summary       = %q{Provides automatic session timeout in a Rails application.}
   spec.homepage      = "http://github.com/pelargir/auto-session-timeout"
   spec.license       = "MIT"
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake", "~> 0"
-  spec.add_development_dependency "minitest", "~> 4.2"
-  spec.add_development_dependency "actionpack", "~> 3.2"
+  spec.add_dependency "actionpack", [">= 3.2", "< 6"]
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest", [">= 4.2", "< 6"]
 end
