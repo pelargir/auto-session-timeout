@@ -16,26 +16,10 @@ describe AutoSessionTimeoutHelper do
 
   describe "#auto_session_timeout_js" do
     it "returns correct JS" do
-      assert_equal "<script type=\"text/javascript\">
-//<![CDATA[
-function PeriodicalQuery() {
-  var request = new XMLHttpRequest();
-  request.onload = function (event) {
-    var status = event.target.status;
-    var response = event.target.response;
-    if (status === 200 && (response === false || response === 'false' || response === null)) {
-      window.location.href = '/timeout';
-    }
-  };
-  request.open('GET', '/active', true);
-  request.responseType = 'json';
-  request.send();
-  setTimeout(PeriodicalQuery, (60 * 1000));
-}
-setTimeout(PeriodicalQuery, (60 * 1000));
-
-//]]>
-</script>", subject.auto_session_timeout_js
+      js = subject.auto_session_timeout_js
+      assert js.include?("window.location.href = '/timeout'")
+      assert js.include?("request.open('GET', '/active', true)")
+      assert js.include?("setTimeout(PeriodicalQuery, (60 * 1000))")
     end
 
     it "uses custom frequency when given" do
