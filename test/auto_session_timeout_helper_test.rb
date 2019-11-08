@@ -39,15 +39,15 @@ setTimeout(PeriodicalQuery, (60 * 1000));
     end
 
     it "uses custom frequency when given" do
-      assert_match /120/, subject.auto_session_timeout_js(frequency: 120)
+      assert_match %r{120}, subject.auto_session_timeout_js(frequency: 120)
     end
 
     it "uses 60 when custom frequency is nil" do
-      assert_match /60/, subject.auto_session_timeout_js(frequency: nil)
+      assert_match %r{60}, subject.auto_session_timeout_js(frequency: nil)
     end
 
     it "accepts attributes" do
-      assert_match /data-turbolinks-eval="false"/, subject.auto_session_timeout_js(attributes: { 'data-turbolinks-eval': 'false' })
+      assert_match %r{data-turbolinks-eval="false"}, subject.auto_session_timeout_js(attributes: { 'data-turbolinks-eval': 'false' })
     end
   end
 

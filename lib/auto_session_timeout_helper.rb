@@ -1,7 +1,6 @@
 module AutoSessionTimeoutHelper
   def auto_session_timeout_js(options={})
     frequency = options[:frequency] || 60
-    verbosity = options[:verbosity] || 2
     attributes = options[:attributes] || {}
     code = <<JS
 function PeriodicalQuery() {
