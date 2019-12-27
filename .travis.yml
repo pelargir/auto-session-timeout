@@ -1,20 +1,41 @@
-language: ruby
 sudo: false
+language: ruby
 cache: bundler
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
 rvm:
-  - 2.2.10
-  - 2.3.8
   - 2.4.9
   - 2.5.7
   - 2.6.5
+  - 2.7.0
   - ruby-head
-matrix:
+env:
+  - RAILS_VERSION='~> 3.2'
+  - RAILS_VERSION='~> 4.0'
+  - RAILS_VERSION='~> 4.1'
+  - RAILS_VERSION='~> 4.2'
+  - RAILS_VERSION='~> 5.0'
+  - RAILS_VERSION='~> 5.1'
+  - RAILS_VERSION='~> 5.2'
+jobs:
+  exclude:
+    - rvm: 2.7.0
+      env: RAILS_VERSION='~> 3.2'
+    - rvm: 2.7.0
+      env: RAILS_VERSION='~> 4.0'
+    - rvm: 2.7.0
+      env: RAILS_VERSION='~> 4.1'
+    - rvm: 2.7.0
+      env: RAILS_VERSION='~> 4.2'
+    - rvm: ruby-head
+      env: RAILS_VERSION='~> 3.2'
+    - rvm: ruby-head
+      env: RAILS_VERSION='~> 4.0'
+    - rvm: ruby-head
+      env: RAILS_VERSION='~> 4.1'
+    - rvm: ruby-head
+      env: RAILS_VERSION='~> 4.2'
   allow_failures:
     - rvm: ruby-head
-    - gemfile: Gemfile
-gemfile:
-  - Gemfile
-script: bundle exec rake
+  fast_finish: true
