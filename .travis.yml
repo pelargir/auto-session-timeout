@@ -2,8 +2,7 @@ sudo: false
 language: ruby
 cache: bundler
 before_install:
-  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
-  - gem install bundler -v '< 2'
+  - gem install bundler -v '~> 2'
 rvm:
   - 2.4.9
   - 2.5.7
