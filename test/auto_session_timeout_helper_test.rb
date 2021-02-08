@@ -2,17 +2,21 @@ require File.dirname(__FILE__) + '/test_helper'
 
 describe AutoSessionTimeoutHelper do
 
-  class ActionView::Base
+  class StubView
+    include AutoSessionTimeoutHelper
+    include ActionView::Helpers::JavaScriptHelper
+    include ActionView::Helpers::TagHelper
+
     def timeout_path
-      '/timeout'
+      "/timeout"
     end
-    
+
     def active_path
-      '/active'
+      "/active"
     end
   end
 
-  subject { ActionView::Base.new }
+  subject { StubView.new }
 
   describe "#auto_session_timeout_js" do
     it "returns correct JS" do
