@@ -21,13 +21,17 @@ env:
   - RAILS_VERSION='~> 6.1'
 jobs:
   exclude:
-    - rvm: 2.7.0
+    - rvm: 2.4.10
+      env: RAILS_VERSION='~> 6.0'
+    - rvm: 2.4.10
+      env: RAILS_VERSION='~> 6.1'
+    - rvm: 2.7.2
       env: RAILS_VERSION='~> 3.2'
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       env: RAILS_VERSION='~> 4.0'
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       env: RAILS_VERSION='~> 4.1'
-    - rvm: 2.7.0
+    - rvm: 2.7.2
       env: RAILS_VERSION='~> 4.2'
     - rvm: ruby-head
       env: RAILS_VERSION='~> 3.2'
