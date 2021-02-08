@@ -5,6 +5,7 @@
 .yardoc
 *.sublime-project
 *.sublime-workspace
+.idea
 Gemfile.lock
 InstalledFiles
 _yardoc
