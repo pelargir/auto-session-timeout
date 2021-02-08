@@ -18,11 +18,15 @@ gem 'auto-session-timeout'
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install auto-session-timeout
+```
+$ gem install auto-session-timeout
+```
 
 ## Usage
 
@@ -31,14 +35,15 @@ After installing, tell your application controller to use auto timeout:
 ```ruby
 class ApplicationController < ActionController::Base
   auto_session_timeout 1.hour
-  ...
 end
 ```
 
-This will use a global timeout of 1 hour. If you want to specify a
-custom timeout value per user, don't pass a value above. Instead,
-override `#auto_timeout` in your `#current_user` model. This is
-typically the `User` class:
+This will use a global timeout of 1 hour. The gem assumes your authentication
+provider has a `#current_user` method that returns the currently logged in user.
+
+If you want to specify a  custom timeout value per user, don't pass a value to
+the controller as shown above. Instead,  override `#auto_timeout` in your
+`#current_user` model. This is  typically the `User` class:
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -86,7 +91,7 @@ actions entirely with your own custom code:
 ```ruby
 class SessionsController < ApplicationController
   def active
-   render_session_status
+    render_session_status
   end
 
   def timeout
@@ -99,13 +104,50 @@ In any of these cases, make sure to properly map the actions in your
 routes.rb file:
 
 ```ruby
-get 'active'  => 'sessions#active'
-get 'timeout' => 'sessions#timeout'
+get "active",  to: "sessions#active"
+get "timeout", to: "sessions#timeout"
 ```
 
 You're done! Enjoy watching your sessions automatically timeout.
 
-## Additional Configuration
+## Using with Devise
+
+When using Devise for authentication you will need to add a scoped
+sessions controller and call the timeout actions helper there.
+For example:
+
+```ruby
+class Users::SessionsController < Devise::SessionsController
+  auto_session_timeout_actions
+end
+```
+
+In your routes.rb file you will need to declare your scoped controller
+and declare the timeout actions inside the same Devise scope:
+
+```ruby
+Rails.application.routes.draw do
+  devise_for :users, controllers: { sessions: "users/sessions" }
+  
+  devise_scope :user do
+    get "active", to: "users/sessions#active"
+    get "timeout", to: "users/sessions#timeout"
+  end
+end
+```
+
+You can use Devise's `#user_signed_in?` method when you call the JS helper
+method in your view:
+
+```erb
+<body>
+  <% if user_signed_in? %>
+    <%= auto_session_timeout_js %>
+  <% end %>
+</body>
+```
+
+## Optional Configuration
 
 By default, the JavaScript code checks the server every 60 seconds for
 active sessions. If you prefer that it check more frequently, pass a
@@ -113,22 +155,12 @@ frequency attribute to the helper method. The frequency is given in
 seconds. The following example checks the server every 15 seconds:
 
 ```erb
-<html>
-  <head>...</head>
-  <body>
-    <% if current_user %>
-      <%= auto_session_timeout_js frequency: 15 %>
-    <% end %>
-    ...
-  </body>
-</html>
+<body>
+  <% if current_user %>
+    <%= auto_session_timeout_js frequency: 15 %>
+  <% end %>
+</body>
 ```
-
-## TODO
-
-* current_user must be defined
-* using Prototype vs. jQuery
-* using with Devise
 
 ## Contributing
 
