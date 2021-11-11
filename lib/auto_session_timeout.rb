@@ -9,7 +9,7 @@ module AutoSessionTimeout
       protect_from_forgery except: [:active, :timeout]
       prepend_before_action do |c|
         if session_expired?(c) && !signing_in?(c)
-          c.send :reset_session
+          handle_session_reset(c)
         else
           unless c.request.original_url.start_with?(c.send(:active_url))
             offset = seconds || (current_user.respond_to?(:auto_timeout) ? current_user.auto_timeout : nil)
@@ -36,6 +36,10 @@ module AutoSessionTimeout
   end
 
   private
+
+  def handle_session_reset(c)
+    c.send :reset_session
+  end
 
   def signing_in?(c)
     c.request.env["PATH_INFO"] == sign_in_path && c.request.env["REQUEST_METHOD"] == "POST"
