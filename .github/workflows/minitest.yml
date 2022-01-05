@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        rails-version: ['3.2', '4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '6.0', '6.1']
+        rails-version: ['3.2', '4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '6.0', '6.1', '7.0']
         ruby-version: ['2.4', '2.5', '2.6', '2.7', '3.0']
         exclude:
           - rails-version: '3.2'
@@ -49,6 +49,13 @@ jobs:
 
           - rails-version: '6.1'
             ruby-version: '2.4'
+
+          - rails-version: '7.0'
+            ruby-version: '2.4'
+          - rails-version: '7.0'
+            ruby-version: '2.5'
+          - rails-version: '7.0'
+            ruby-version: '2.6'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
