@@ -1,0 +1,62 @@
+name: Minitest
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rails-version: ['3.2', '4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '6.0', '6.1']
+        ruby-version: ['2.4', '2.5', '2.6', '2.7', '3.0']
+        exclude:
+          - rails-version: '3.2'
+            ruby-version: '2.7'
+          - rails-version: '3.2'
+            ruby-version: '3.0'
+
+          - rails-version: '4.0'
+            ruby-version: '2.7'
+          - rails-version: '4.0'
+            ruby-version: '3.0'
+
+          - rails-version: '4.1'
+            ruby-version: '2.7'
+          - rails-version: '4.1'
+            ruby-version: '3.0'
+
+          - rails-version: '4.2'
+            ruby-version: '2.7'
+          - rails-version: '4.2'
+            ruby-version: '3.0'
+
+          - rails-version: '5.0'
+            ruby-version: '3.0'
+
+          - rails-version: '5.1'
+            ruby-version: '3.0'
+
+          - rails-version: '5.2'
+            ruby-version: '3.0'
+
+          - rails-version: '6.0'
+            ruby-version: '2.4'
+
+          - rails-version: '6.1'
+            ruby-version: '2.4'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      env:
+        RAILS_VERSION: ${{ matrix.rails-version }}
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run tests
+      run: bundle exec rake
