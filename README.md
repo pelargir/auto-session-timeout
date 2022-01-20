@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/pelargir/auto-session-timeout.svg?branch=master)](https://travis-ci.com/pelargir/auto-session-timeout)
+![Build Status](https://github.com/pelargir/auto-session-timeout/actions/workflows/minitest.yml/badge.svg)
 
 # Auto::Session::Timeout
 
