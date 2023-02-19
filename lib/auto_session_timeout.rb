@@ -26,7 +26,7 @@ module AutoSessionTimeout
   end
   
   def render_session_status
-    response.headers["Etag"] = ""  # clear etags to prevent caching
+    response.headers["Etag"] = nil  # clear etags to prevent caching
     render plain: !!current_user, status: 200
   end
   
