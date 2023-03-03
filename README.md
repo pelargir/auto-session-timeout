@@ -162,6 +162,31 @@ seconds. The following example checks the server every 15 seconds:
 </body>
 ```
 
+## Perform operation before session reset
+
+If you want to perform some operation before session reset, you can use `before_session_reset` method. This method takes a block which will be executed before session reset. For example, perform some app specific operation, you can do it like this:
+
+Create a controller concern called `before_session_reset.rb` and add following code to it:
+
+```rb
+module BeforeSessionReset
+ extend ActiveSupport::Concern
+
+ private
+
+   def before_session_reset
+     # your custom code goes here
+   end
+end
+```
+
+After that, include this concern in your `ApplicationController` along with `auto_session_timeout`:
+
+```rb
+include BeforeSessionReset
+auto_session_timeout
+```
+
 ## Contributing
 
 1. Fork it
