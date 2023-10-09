@@ -12,37 +12,73 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        rails-version: ['3.2', '4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '6.0', '6.1', '7.0']
-        ruby-version: ['2.4', '2.5', '2.6', '2.7', '3.0']
+        rails-version: ['3.2', '4.0', '4.1', '4.2', '5.0', '5.1', '5.2', '6.0', '6.1', '7.0.1', '7.1']
+        ruby-version: ['2.4', '2.5', '2.6', '2.7', '3.0', '3.1', '3.2']
         exclude:
           - rails-version: '3.2'
             ruby-version: '2.7'
           - rails-version: '3.2'
             ruby-version: '3.0'
+          - rails-version: '3.2'
+            ruby-version: '3.1'
+          - rails-version: '3.2'
+            ruby-version: '3.2'
 
           - rails-version: '4.0'
             ruby-version: '2.7'
           - rails-version: '4.0'
             ruby-version: '3.0'
+          - rails-version: '4.0'
+            ruby-version: '3.1'
+          - rails-version: '4.0'
+            ruby-version: '3.2'
 
           - rails-version: '4.1'
             ruby-version: '2.7'
           - rails-version: '4.1'
             ruby-version: '3.0'
+          - rails-version: '4.1'
+            ruby-version: '3.1'
+          - rails-version: '4.1'
+            ruby-version: '3.2'
 
+          - rails-version: '4.2'
+            ruby-version: '2.4'
           - rails-version: '4.2'
             ruby-version: '2.7'
           - rails-version: '4.2'
             ruby-version: '3.0'
+          - rails-version: '4.2'
+            ruby-version: '3.1'
+          - rails-version: '4.2'
+            ruby-version: '3.2'
 
           - rails-version: '5.0'
+            ruby-version: '2.4'
+          - rails-version: '5.0'
             ruby-version: '3.0'
+          - rails-version: '5.0'
+            ruby-version: '3.1'
+          - rails-version: '5.0'
+            ruby-version: '3.2'
 
           - rails-version: '5.1'
+            ruby-version: '2.4'
+          - rails-version: '5.1'
             ruby-version: '3.0'
+          - rails-version: '5.1'
+            ruby-version: '3.1'
+          - rails-version: '5.1'
+            ruby-version: '3.2'
 
           - rails-version: '5.2'
+            ruby-version: '2.4'
+          - rails-version: '5.2'
             ruby-version: '3.0'
+          - rails-version: '5.2'
+            ruby-version: '3.1'
+          - rails-version: '5.2'
+            ruby-version: '3.2'
 
           - rails-version: '6.0'
             ruby-version: '2.4'
@@ -50,11 +86,18 @@ jobs:
           - rails-version: '6.1'
             ruby-version: '2.4'
 
-          - rails-version: '7.0'
+          - rails-version: '7.0.1'
             ruby-version: '2.4'
-          - rails-version: '7.0'
+          - rails-version: '7.0.1'
             ruby-version: '2.5'
-          - rails-version: '7.0'
+          - rails-version: '7.0.1'
+            ruby-version: '2.6'
+
+          - rails-version: '7.1'
+            ruby-version: '2.4'
+          - rails-version: '7.1'
+            ruby-version: '2.5'
+          - rails-version: '7.1'
             ruby-version: '2.6'
     steps:
     - uses: actions/checkout@v2
