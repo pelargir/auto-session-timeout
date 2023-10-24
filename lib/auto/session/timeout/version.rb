@@ -1,7 +1,7 @@
 module Auto
   module Session
     module Timeout
-      VERSION = "1.0"
+      VERSION = "1.1"
     end
   end
 end

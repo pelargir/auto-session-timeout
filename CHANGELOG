@@ -1,3 +1,7 @@
+2023-10-24 - v1.1
+
+2023-10-09 - Compatibility with Rails 7.1 [tim-s-ccs]
+
 2023-01-18 - v1.0
 
 2023-01-18 - Compatablity issue with Rack 2.2.4 [GearoidDC]
