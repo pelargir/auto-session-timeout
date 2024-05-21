@@ -1,12 +1,11 @@
 module AutoSessionTimeout
-  
+
   def self.included(controller)
     controller.extend ClassMethods
   end
-  
+
   module ClassMethods
     def auto_session_timeout(seconds=nil)
-      protect_from_forgery except: [:active, :timeout]
       prepend_before_action do |c|
         if session_expired?(c) && !signing_in?(c)
           handle_session_reset(c)
@@ -18,18 +17,18 @@ module AutoSessionTimeout
         end
       end
     end
-    
+
     def auto_session_timeout_actions
       define_method(:active) { render_session_status }
       define_method(:timeout) { render_session_timeout }
     end
   end
-  
+
   def render_session_status
     response.headers["Etag"] = nil  # clear etags to prevent caching
     render plain: !!current_user, status: 200
   end
-  
+
   def render_session_timeout
     flash[:notice] = t("devise.failure.timeout", default: "Your session has timed out.")
     redirect_to sign_in_path
@@ -54,7 +53,7 @@ module AutoSessionTimeout
   rescue
     "/login"
   end
-  
+
 end
 
 ActionController::Base.send :include, AutoSessionTimeout
