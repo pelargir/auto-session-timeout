@@ -1,3 +1,16 @@
+2026-01-16 - v1.4
+
+Allow Rails 8.* by @Epigene in #52
+
+2025-09-01 - v1.3
+
+Allow Rails 8.0 by @jdettmannnava in #50
+
+2024-08-19 - v1.2
+
+Remove protect_from_forgery call by @jlcapps in #47
+chore: update compatibility with rails 7.2 by @jeanpauldejong in #49
+
 2023-10-24 - v1.1
 
 2023-10-09 - Compatibility with Rails 7.1 [tim-s-ccs]
