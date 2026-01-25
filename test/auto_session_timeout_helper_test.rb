@@ -37,6 +37,22 @@ describe AutoSessionTimeoutHelper do
     it "accepts attributes" do
       assert_match %r{data-turbolinks-eval="false"}, subject.auto_session_timeout_js(attributes: { 'data-turbolinks-eval': 'false' })
     end
+
+    it "uses default timeout_path when not provided" do
+      js = subject.auto_session_timeout_js
+      assert js.include?("window.location.href = '/timeout'")
+    end
+
+    it "uses custom timeout_path when provided" do
+      js = subject.auto_session_timeout_js(timeout_path: '/custom_timeout?param=value')
+      assert js.include?("window.location.href = '/custom_timeout?param=value'")
+      refute js.include?("window.location.href = '/timeout'")
+    end
+
+    it "uses custom timeout_path with multiple query params" do
+      js = subject.auto_session_timeout_js(timeout_path: '/timeout?login_source=web&customer=123&location=home')
+      assert js.include?("window.location.href = '/timeout?login_source=web&customer=123&location=home'")
+    end
   end
 
 end
