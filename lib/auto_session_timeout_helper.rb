@@ -4,6 +4,9 @@ module AutoSessionTimeoutHelper
     attributes = options[:attributes] || {}
     timeout_url = options[:timeout_path] || timeout_path
     code = <<JS
+if (typeof(window.autoSessionTimeoutId) !== 'undefined') {
+  clearTimeout(window.autoSessionTimeoutId);
+}
 function PeriodicalQuery() {
   var request = new XMLHttpRequest();
   request.onload = function (event) {
@@ -16,9 +19,9 @@ function PeriodicalQuery() {
   request.open('GET', '#{active_path}', true);
   request.responseType = 'json';
   request.send();
-  setTimeout(PeriodicalQuery, (#{frequency} * 1000));
+  window.autoSessionTimeoutId = setTimeout(PeriodicalQuery, (#{frequency} * 1000));
 }
-setTimeout(PeriodicalQuery, (#{frequency} * 1000));
+window.autoSessionTimeoutId = setTimeout(PeriodicalQuery, (#{frequency} * 1000));
 JS
     javascript_tag(code, attributes)
   end

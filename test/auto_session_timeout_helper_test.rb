@@ -53,6 +53,12 @@ describe AutoSessionTimeoutHelper do
       js = subject.auto_session_timeout_js(timeout_path: '/timeout?login_source=web&customer=123&location=home')
       assert js.include?("window.location.href = '/timeout?login_source=web&customer=123&location=home'")
     end
+
+    it "clears existing timeout to prevent duplicates with Turbolinks/Turbo" do
+      js = subject.auto_session_timeout_js
+      assert js.include?("clearTimeout(window.autoSessionTimeoutId)")
+      assert js.include?("window.autoSessionTimeoutId = setTimeout(PeriodicalQuery")
+    end
   end
 
 end
