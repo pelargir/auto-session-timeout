@@ -54,6 +54,12 @@ module AutoSessionTimeout
     "/login"
   end
 
+  def active_url
+    main_app.active_url
+  rescue
+    "/active"
+  end
+
 end
 
 ActiveSupport.on_load(:action_controller) do
