@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "actionpack", [">= 3.2", "< 9"]
   spec.add_development_dependency "bundler", "~> 2"
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "minitest", [">= 4.2", "< 6"]
+  spec.add_development_dependency "minitest", [">= 4.2", "<= 6.0.5"]
 end
